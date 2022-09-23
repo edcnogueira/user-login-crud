@@ -12,8 +12,6 @@ const prisma = new PrismaClient();
 // const users: Array<UsersProps> = [{ id: 1, username: "admin", password: "admin" }];
 
 export const getAllUsers = async () => {
-  await prisma.$connect();
-
   const users = await prisma.users.findMany({
     where: { active: true },
   });
@@ -23,8 +21,6 @@ export const getAllUsers = async () => {
 };
 
 export const addUsers = async (username: string, password: string) => {
-  await prisma.$connect();
-
   await prisma.users.create({
     data: {
       username: username,
@@ -38,8 +34,6 @@ export const addUsers = async (username: string, password: string) => {
 };
 
 export const editUser = async (id: string, username?: string, password?: string) => {
-  await prisma.$connect();
-
   await prisma.users.update({
     where: { id },
     data: { username: username, password: password },
@@ -48,14 +42,9 @@ export const editUser = async (id: string, username?: string, password?: string)
   await prisma.$disconnect();
 
   return;
-  //   const userFind = users.find(user => user.id === id);
-  //   console.log(userFind);
-  //   return userFind;
 };
 
 export const disableUser = async (id: string) => {
-  await prisma.$connect();
-
   await prisma.users.update({
     where: { id },
     data: { active: false },
@@ -67,8 +56,6 @@ export const disableUser = async (id: string) => {
 };
 
 export const removeUser = async (id: string) => {
-  await prisma.$connect();
-
   await prisma.users.delete({
     where: { id },
   });

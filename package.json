@@ -2,8 +2,12 @@
   "name": "user-login-crud",
   "version": "1.0.0",
   "main": "index.js",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "seed": "npx prisma db seed"
   },
   "repository": "git@github.com:edcnogueira/user-login-crud.git",
   "author": "Edjancarlos <edjan.nogueira14@gmail.com>",
@@ -16,7 +20,9 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
+    "@types/node": "^18.7.19",
     "@types/uuid": "^8.3.4",
+    "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.8.3"
   }
