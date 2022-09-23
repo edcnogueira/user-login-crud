@@ -3,8 +3,8 @@ import { addUsers, editUser, getAllUsers } from "../controllers/users";
 
 const usersRoutes = Router();
 
-usersRoutes.get("/", (req, res) => {
-  const users = getAllUsers();
+usersRoutes.get("/", async (req, res) => {
+  const users = await getAllUsers();
 
   if (users) return res.status(200).json({ users: users });
 
@@ -24,17 +24,17 @@ usersRoutes.post("/", async (req, res) => {
   }
 });
 
-usersRoutes.put("/:id", (req, res) => {
-  const {
-    params: { id },
-  } = req;
+// usersRoutes.put("/:id", (req, res) => {
+//   const {
+//     params: { id },
+//   } = req;
 
-  try {
-    const userEdit = editUser(id);
-    if (userEdit) return res.status(200).json({ user: userEdit });
-  } catch (error) {
-    return res.status(400).json({ message: error });
-  }
-});
+//   try {
+//     const userEdit = editUser(id);
+//     if (userEdit) return res.status(200).json({ user: userEdit });
+//   } catch (error) {
+//     return res.status(400).json({ message: error });
+//   }
+// });
 
 export { usersRoutes };
