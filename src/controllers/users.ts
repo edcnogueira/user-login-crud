@@ -1,11 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { v4 as uuidv4 } from "uuid";
-
-interface UsersProps {
-  id?: string;
-  username: string;
-  password: string;
-}
 
 const prisma = new PrismaClient();
 
