@@ -1,17 +1,37 @@
+import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
-const users: Array<object> = [];
+interface UsersProps {
+  id: string | number;
+  username: string;
+  password: string;
+}
+
+const prisma = new PrismaClient();
+
+const users: Array<UsersProps> = [{ id: 1, username: "admin", password: "admin" }];
 
 export const getAllUsers = () => {
   return users;
 };
 
-export const addUsers = (username: string, password: string) => {
-  users.push({
-    id: uuidv4(),
-    username: username,
-    password: password,
+export const addUsers = async (username: string, password: string) => {
+  await prisma.$connect();
+
+  await prisma.users.create({
+    data: {
+      username: username,
+      password: password,
+    },
   });
 
-  return users;
+  await prisma.$disconnect();
+
+  return;
+};
+
+export const editUser = (id: string) => {
+  const userFind = users.find(user => user.id === id);
+  console.log(userFind);
+  return userFind;
 };
