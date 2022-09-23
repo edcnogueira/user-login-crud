@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { addUsers, editUser, getAllUsers } from "../controllers/users";
+import {
+  addUsers,
+  disableUser,
+  editUser,
+  getAllUsers,
+  removeUser,
+} from "../controllers/users";
 
 const usersRoutes = Router();
 
@@ -24,17 +30,44 @@ usersRoutes.post("/", async (req, res) => {
   }
 });
 
-// usersRoutes.put("/:id", (req, res) => {
-//   const {
-//     params: { id },
-//   } = req;
+usersRoutes.put("/:id", async (req, res) => {
+  const {
+    params: { id },
+    body: { username, password },
+  } = req;
 
-//   try {
-//     const userEdit = editUser(id);
-//     if (userEdit) return res.status(200).json({ user: userEdit });
-//   } catch (error) {
-//     return res.status(400).json({ message: error });
-//   }
-// });
+  try {
+    await editUser(id, username, password);
+    return res.status(200).json({ message: "ok" });
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
+usersRoutes.put("/disable/:id", async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    await disableUser(id);
+    return res.status(200).json({ message: "user disabled" });
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
+usersRoutes.delete("/delete/:id", async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    await removeUser(id);
+    return res.status(200).json({ message: "user removed" });
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
 
 export { usersRoutes };

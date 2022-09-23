@@ -11,6 +11,7 @@ model Users {
   id        String   @id @default(uuid())
   username  String   @unique
   password  String
+  active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Logs      Logs[]
