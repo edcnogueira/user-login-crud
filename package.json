@@ -7,6 +7,8 @@
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "generate": "npx prisma generate",
+    "migrate": "npx prisma migrate dev --name init",
     "seed": "npx prisma db seed"
   },
   "repository": "git@github.com:edcnogueira/user-login-crud.git",
