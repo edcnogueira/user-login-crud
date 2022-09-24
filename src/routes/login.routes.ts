@@ -20,4 +20,8 @@ loginRoute.post("/", async (req, res) => {
   }
 });
 
+loginRoute.post("/logout", async (req, res) => {
+  return res.status(200).json({ auth: false, token: null });
+});
+
 export { loginRoute };
