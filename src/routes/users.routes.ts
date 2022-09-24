@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
   addUsers,
   disableUser,
@@ -7,9 +8,11 @@ import {
   removeUser,
 } from "../controllers/users";
 
+import { authMiddleware } from "../middlewares/authMiddleware";
+
 const usersRoutes = Router();
 
-usersRoutes.get("/", async (req, res) => {
+usersRoutes.get("/", authMiddleware, async (req, res) => {
   const users = await getAllUsers();
 
   if (users) return res.status(200).json({ users: users });
@@ -17,7 +20,7 @@ usersRoutes.get("/", async (req, res) => {
   return res.status(400).json({ message: "error" });
 });
 
-usersRoutes.post("/", async (req, res) => {
+usersRoutes.post("/", authMiddleware, async (req, res) => {
   const {
     body: { username, password },
   } = req;
@@ -30,7 +33,7 @@ usersRoutes.post("/", async (req, res) => {
   }
 });
 
-usersRoutes.put("/:id", async (req, res) => {
+usersRoutes.put("/:id", authMiddleware, async (req, res) => {
   const {
     params: { id },
     body: { username, password },
@@ -44,7 +47,7 @@ usersRoutes.put("/:id", async (req, res) => {
   }
 });
 
-usersRoutes.put("/disable/:id", async (req, res) => {
+usersRoutes.put("/disable/:id", authMiddleware, async (req, res) => {
   const {
     params: { id },
   } = req;
@@ -57,7 +60,7 @@ usersRoutes.put("/disable/:id", async (req, res) => {
   }
 });
 
-usersRoutes.delete("/delete/:id", async (req, res) => {
+usersRoutes.delete("/delete/:id", authMiddleware, async (req, res) => {
   const {
     params: { id },
   } = req;

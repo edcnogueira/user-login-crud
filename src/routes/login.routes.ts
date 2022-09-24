@@ -12,7 +12,7 @@ loginRoute.post("/", async (req, res) => {
 
     if (user === false) return res.status(200).json({ message: "user does not exist" });
 
-    if (user === true) return res.status(200).json({ message: "user logged" });
+    if (user) return res.status(200).json({ auth: true, token: user });
 
     return res.status(200).json({ message: "invalid password" });
   } catch (error) {
