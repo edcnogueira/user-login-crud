@@ -8,6 +8,12 @@ Esta é uma api com de login com token de autenticação e um CRUD de usuários
 
 ## Documentação da API
 
+#### Subindo banco postgreSQL com docker-compose
+
+```
+  docker-compose up -d
+```
+
 #### Instalação node_modules
 
 ```
@@ -26,11 +32,6 @@ Esta é uma api com de login com token de autenticação e um CRUD de usuários
   npm run seed
 ```
 
-#### Subindo banco postgreSQL com docker-compose
-
-```
-  docker-compose up -d
-```
 
 #### Iniciando projeto
 
